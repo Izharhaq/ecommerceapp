@@ -77,13 +77,13 @@ WSGI_APPLICATION = 'ecommerceapp.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "tenant_schemas.postgresql_backend",
-        "NAME": "myproject",
-        "USER": "myprojectuser",
-        "PASSWORD": "password",
-        "HOST": "localhost",
-        "PORT": 5432,
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'izharproject',
+        'USER': 'izhar',
+        'PASSWORD': 'hfcl@123',
+        'HOST': 'localhost',  
+        'PORT': '5432',      
     }
 }
 
