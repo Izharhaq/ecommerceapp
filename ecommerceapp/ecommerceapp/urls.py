@@ -21,6 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('products/', include('products.urls')),
     path('orders/', include('orders.urls')),
+    path('accounts/', include('accounts.urls')),
     path('api-auth/', include('rest_framework.urls')),  # For DRF authentication
 ]
 
