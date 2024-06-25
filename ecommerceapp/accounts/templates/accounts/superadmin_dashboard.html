@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Superadmin Dashboard</title>
+</head>
+<body>
+    <h2>Superadmin Dashboard</h2>
+    <h3>Subusers:</h3>
+    <ul>
+        {% for subuser in subusers %}
+        <li>{{ subuser.username }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'product-list' %}">Manage Products</a><br>
+    <a href="{% url 'order-list' %}">Manage Orders</a>
+</body>
+</html>

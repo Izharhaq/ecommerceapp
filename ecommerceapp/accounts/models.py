@@ -5,7 +5,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, Group, Permission
 
 class CustomUser(AbstractUser):
-    is_subuser = models.BooleanField(default=False)
+    is_subuser = models.BooleanField(default=True)
     groups = models.ManyToManyField(
         Group,
         related_name='customuser_set',
