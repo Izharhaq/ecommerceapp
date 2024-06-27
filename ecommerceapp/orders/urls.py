@@ -1,11 +1,10 @@
 from django.urls import path
-from .views import OrderListView, OrderDetailView, OrderCreateView, OrderUpdateView, OrderDeleteView
+from .views import OrderListView, OrderUpdateView
 
 urlpatterns = [
-    path('list/', OrderListView.as_view(), name='orders_list'),
-    path('<int:pk>/', OrderDetailView.as_view(), name='order_detail'),
-    path('add/', OrderCreateView.as_view(), name='add_order'),
-    path('update/<int:pk>/', OrderUpdateView.as_view(), name='update_order'),
-    path('delete/<int:pk>/', OrderDeleteView.as_view(), name='delete_order'),
+
+    path('', OrderListView.as_view(), name='orders_list'),      # To get list and add products
+    path('<str:order_no>/', OrderListView.as_view(), name='orders_detail'),     #To get a product detail
+    path('update/<str:order_no>/', OrderUpdateView.as_view(), name='update_order'),  #To upadte or delete a product with pk
 
 ]
