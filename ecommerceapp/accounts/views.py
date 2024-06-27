@@ -7,9 +7,13 @@ from .serializers import UserSerializer, LoginSerializer
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import TemplateView
 from .models import CustomUser
+from rest_framework.views import APIView
 
 User = get_user_model()
 
+class LoginView(APIView):
+    def get(self, request):
+        return render(request, 'admin_login.html')
 
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()

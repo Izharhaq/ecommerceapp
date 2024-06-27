@@ -2,32 +2,35 @@ from rest_framework import generics
 from .models import Product
 from .serializers import ProductSerializer
 from rest_framework.permissions import IsAuthenticated
+from accounts.permissions import IsAdminOrHasEditPermission
+from django.shortcuts import render
+from django.http import JsonResponse   
 
 class ProductListView(generics.ListAPIView):        #GET Method
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsAdminOrHasEditPermission]
 
 class ProductDetailView(generics.RetrieveAPIView):      #GET Method
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsAdminOrHasEditPermission]
 
 class ProductCreateView(generics.CreateAPIView):    # POST Method
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsAdminOrHasEditPermission]
 
 
 class ProductUpdateView(generics.UpdateAPIView):     # PUT Method
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsAdminOrHasEditPermission]
 
 class ProductDeleteView(generics.DestroyAPIView):   # DELETE Method
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsAdminOrHasEditPermission]
 
 
 
@@ -89,3 +92,29 @@ class ProductListCreateUpdateRetrieveDeleteAPIView(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
 '''
+
+
+################
+# def product_list(request):
+#     return render(request, 'products/product_list.html', context={})
+
+def json_view(request):
+    # This will render the HTML template
+    return render(request, 'templates/json_template.html')
+
+def fetch_products(request):
+    # Simulated JSON data representing saved products
+    products = [
+        {
+            "id": 1,
+            "name": "watch",
+            "description": "smart watch",
+            "price": "10000.00",
+            "stock": 10,
+            "created_at": "2024-06-25T13:13:08.997991Z",
+            "updated_at": "2024-06-25T13:13:08.998015Z",
+            "owner": None
+        }
+        # Add more products if needed
+    ]
+    return JsonResponse(products, safe=False)

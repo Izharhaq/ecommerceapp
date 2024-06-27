@@ -1,11 +1,13 @@
 from django.db import models
-
-# Create your models here.
-
 from django.contrib.auth.models import AbstractUser, Group, Permission
 
 class CustomUser(AbstractUser):
-    is_subuser = models.BooleanField(default=True)
+    is_admin = models.BooleanField(default=False)
+    is_subuser = models.BooleanField(default=False)
+
+    email = models.EmailField(unique=True)
+    
+
     groups = models.ManyToManyField(
         Group,
         related_name='customuser_set',
