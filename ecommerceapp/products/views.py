@@ -6,36 +6,36 @@ from accounts.permissions import IsAdminOrHasEditPermission
 from django.shortcuts import render
 from django.http import JsonResponse   
 
-class ProductListView(generics.ListAPIView):        #GET Method
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-    permission_classes = [IsAuthenticated, IsAdminOrHasEditPermission]
+# class ProductListView(generics.ListAPIView):        #GET Method
+#     queryset = Product.objects.all()
+#     serializer_class = ProductSerializer
+#     permission_classes = [IsAuthenticated, IsAdminOrHasEditPermission]
 
-class ProductDetailView(generics.RetrieveAPIView):      #GET Method
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-    permission_classes = [IsAuthenticated, IsAdminOrHasEditPermission]
+# class ProductDetailView(generics.RetrieveAPIView):      #GET Method
+#     queryset = Product.objects.all()
+#     serializer_class = ProductSerializer
+#     permission_classes = [IsAuthenticated, IsAdminOrHasEditPermission]
 
-class ProductCreateView(generics.CreateAPIView):    # POST Method
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-    permission_classes = [IsAuthenticated, IsAdminOrHasEditPermission]
+# class ProductCreateView(generics.CreateAPIView):    # POST Method
+#     queryset = Product.objects.all()
+#     serializer_class = ProductSerializer
+#     permission_classes = [IsAuthenticated, IsAdminOrHasEditPermission]
 
 
-class ProductUpdateView(generics.UpdateAPIView):     # PUT Method
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-    permission_classes = [IsAuthenticated, IsAdminOrHasEditPermission]
+# class ProductUpdateView(generics.UpdateAPIView):     # PUT Method
+#     queryset = Product.objects.all()
+#     serializer_class = ProductSerializer
+#     permission_classes = [IsAuthenticated, IsAdminOrHasEditPermission]
 
-class ProductDeleteView(generics.DestroyAPIView):   # DELETE Method
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-    permission_classes = [IsAuthenticated, IsAdminOrHasEditPermission]
+# class ProductDeleteView(generics.DestroyAPIView):   # DELETE Method
+#     queryset = Product.objects.all()
+#     serializer_class = ProductSerializer
+#     permission_classes = [IsAuthenticated, IsAdminOrHasEditPermission]
 
 
 
 ######################
-'''
+
 from rest_framework import status, generics, mixins
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -43,8 +43,8 @@ from rest_framework.permissions import IsAuthenticated
 from .models import Product
 from .serializers import ProductSerializer
 
-class ProductListCreateUpdateRetrieveDeleteAPIView(APIView):
-    permission_classes = [IsAuthenticated]
+class ProductListView(APIView):
+    permission_classes = [IsAuthenticated, IsAdminOrHasEditPermission]
 
     def get(self, request, pk=None, format=None):
         if pk:
@@ -61,6 +61,7 @@ class ProductListCreateUpdateRetrieveDeleteAPIView(APIView):
             serializer = ProductSerializer(products, many=True)
             return Response(serializer.data)
 
+
     def post(self, request, format=None):
         # Create a new product
         serializer = ProductSerializer(data=request.data)
@@ -68,6 +69,9 @@ class ProductListCreateUpdateRetrieveDeleteAPIView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class ProductUpdateView(APIView):
+    permission_classes = [IsAuthenticated, IsAdminOrHasEditPermission]
 
     def put(self, request, pk, format=None):
         # Update an existing product
@@ -91,7 +95,7 @@ class ProductListCreateUpdateRetrieveDeleteAPIView(APIView):
         except Product.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
-'''
+
 
 
 ################
