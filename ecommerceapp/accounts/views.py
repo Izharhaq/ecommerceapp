@@ -11,7 +11,7 @@ from rest_framework.views import APIView
 
 User = get_user_model()
 
-# class LoginView(APIView):
+
 def get(self, request):
     templatefilename= "accounts/admin_login.html"
     return render(request, templatefilename)
