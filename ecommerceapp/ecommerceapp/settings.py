@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'products',
     'orders',
     'home',
-    'rest_framework_simplejwt',         ##########
+    'rest_framework_simplejwt',
+    'utils',       ##########
 ]
 
 ##########
