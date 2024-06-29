@@ -5,7 +5,7 @@ class CustomUser(AbstractUser):
     is_admin = models.BooleanField(default=False)
     is_subuser = models.BooleanField(default=False)
 
-    email = models.EmailField(unique=True)
+    email = models.EmailField()
     
 
     groups = models.ManyToManyField(
